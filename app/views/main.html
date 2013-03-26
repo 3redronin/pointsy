@@ -1,19 +1,32 @@
 <div class="hero-unit">
   <h1>Pointsy</h1>
 
-
-  <table class="table">
-    <thead>
+  <form>
+    <table class="table">
+      <thead>
       <tr>
+        <th></th>
         <th ng-repeat="player in players">{{player}}</th>
       </tr>
-    </thead>
-    <tbody>
+      </thead>
+      <tbody>
       <tr ng-repeat="round in rounds">
-        <td ng-repeat="score in round">{{score}}</td>
+        <td>{{round.number}}</td>
+        <td ng-repeat="score in round.scores">{{score}}</td>
       </tr>
-    </tbody>
-  </table>
-
+      </tbody>
+      <tfoot>
+      <tr>
+        <th>
+          <button class="btn" ng-click="saveRoundScore()"><i class="icon-plus"></i>Add</button>
+        </th>
+        <th ng-repeat="player in players">
+          <input type="number" ng-model="changeAmount" class="scoreInput" ng-model-instant/>
+          {{changeAmount}}
+        </th>
+      </tr>
+      </tfoot>
+    </table>
+  </form>
 
 </div>
