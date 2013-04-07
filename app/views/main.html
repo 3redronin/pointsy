@@ -21,7 +21,7 @@
         <td>{{round.number}}</td>
         <td ng-repeat="score in round.scores" class="score">
           <div ng-show="score.total == null">
-          <span ng-repeat="delta in [-1, 0, 1]" class="deltaPanel">
+          <span ng-repeat="delta in round.commonDeltas(score.index)" class="deltaPanel">
             <button ng-click="changeScore(round, score, delta)">{{delta | deltaPrint}}</button>
           </span>
           </div>
