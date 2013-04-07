@@ -2,7 +2,14 @@
   <h1>Pointsy</h1>
 
   <form>
-    <table class="table">
+    <div>
+      New player:
+      <input type="text" ng-model="newPlayer">
+      <input type="submit" ng-click="addPlayer()">
+    </div>
+  </form>
+  <form>
+    <table>
       <thead>
       <tr>
         <th></th>
@@ -10,22 +17,19 @@
       </tr>
       </thead>
       <tbody>
-      <tr ng-repeat="round in rounds">
+      <tr ng-repeat="round in rounds" ng-model="round">
         <td>{{round.number}}</td>
-        <td ng-repeat="score in round.scores">{{score}}</td>
+        <td ng-repeat="score in round.scores" class="score">
+          <div ng-show="score.total == null">
+          <span ng-repeat="delta in [-1, 0, 1]" class="deltaPanel">
+            <button ng-click="changeScore(round, score, delta)">{{delta | deltaPrint}}</button>
+          </span>
+          </div>
+          <input type="number" ng-model="score.total"
+                 ng-change="addRoundIfNeeded(round)">
+        </td>
       </tr>
       </tbody>
-      <tfoot>
-      <tr>
-        <th>
-          <button class="btn" ng-click="saveRoundScore()"><i class="icon-plus"></i>Add</button>
-        </th>
-        <th ng-repeat="player in players">
-          <input type="number" ng-model="changeAmount" class="scoreInput" ng-model-instant/>
-          {{changeAmount}}
-        </th>
-      </tr>
-      </tfoot>
     </table>
   </form>
 
