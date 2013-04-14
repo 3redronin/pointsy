@@ -1,38 +1,10 @@
 <div class="hero-unit">
   <h1>Pointsy</h1>
 
-  <scorecard></scorecard>
+  <h2>Game one</h2>
+  <scorecard game="game"></scorecard>
 
-  <form>
-    <div>
-      New player:
-      <input type="text" ng-model="newPlayer">
-      <input type="submit" ng-click="addPlayer()">
-    </div>
-  </form>
-  <form>
-    <table>
-      <thead>
-      <tr>
-        <th></th>
-        <th ng-repeat="player in game.players">{{player}}</th>
-      </tr>
-      </thead>
-      <tbody>
-      <tr ng-repeat="round in game.rounds" ng-model="round">
-        <td>{{round.number}}</td>
-        <td ng-repeat="score in round.scores" class="score">
-          <div ng-show="score.total == null">
-          <span ng-repeat="delta in round.commonDeltas(score.index)" class="deltaPanel">
-            <button ng-click="changeScore(round, score, delta)">{{delta | deltaPrinter}}</button>
-          </span>
-          </div>
-          <input type="number" ng-model="score.total"
-                 ng-change="addRoundIfNeeded(round)">
-        </td>
-      </tr>
-      </tbody>
-    </table>
-  </form>
+  <h2>Game two</h2>
+  <scorecard game="game2"></scorecard>
 
 </div>

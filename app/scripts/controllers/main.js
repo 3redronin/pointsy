@@ -15,25 +15,7 @@ angular.module('pointsyApp')
       game.addRound();
 
       $scope.game = game;
-
-      $scope.addRoundIfNeeded = function (round) {
-        if (round.isLast()) {
-          game.addRound();
-        }
-        return true;
-      };
-
-      $scope.changeScore = function (round, score, delta) {
-        game.changeScore(round, score, delta);
-        $scope.addRoundIfNeeded(round);
-      };
-
-      $scope.addPlayer = function () {
-        var name = $scope.newPlayer.trim();
-        if (name) {
-          game.addPlayer(name);
-        }
-        $scope.newPlayer = "";
-      };
+      $scope.game2 = gameFactory.create();
+      $scope.game2.addRound();
 
     });
