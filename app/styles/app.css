@@ -3,10 +3,16 @@ th {
 }
 td.score {
   text-align: center;
+  padding-right:10px;
+  padding-left: 10px;
 }
 td.score input {
   width: 50px;
   text-align: right;
+  border: 0;
+  background-color: transparent;
+  font-size: larger;
+  font-weight: bold;
 }
 .deltaPanel {
   white-space: nowrap;
