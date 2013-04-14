@@ -1,10 +1,9 @@
 <div class="hero-unit">
   <h1>Pointsy</h1>
 
-  <h2>Game one</h2>
-  <scorecard game="game"></scorecard>
-
-  <h2>Game two</h2>
-  <scorecard game="game2"></scorecard>
+  <div ng-repeat="game in games">
+    <h2>Game {{$index + 1}}</h2>
+    <scorecard game="game"></scorecard>
+  </div>
 
 </div>

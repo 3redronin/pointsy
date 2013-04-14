@@ -9,13 +9,14 @@ angular.module('pointsyApp')
      */
     function ($scope, gameFactory) {
       var game = gameFactory.create();
-
       game.addPlayer("Whawha");
+
       game.addPlayer("Daniel");
       game.addRound();
 
-      $scope.game = game;
-      $scope.game2 = gameFactory.create();
-      $scope.game2.addRound();
+      var game2 = gameFactory.create();
+      game2.addRound();
+
+      $scope.games = [ game, game2 ];
 
     });
