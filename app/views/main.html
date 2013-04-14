@@ -1,6 +1,8 @@
 <div class="hero-unit">
   <h1>Pointsy</h1>
 
+  <scorecard></scorecard>
+
   <form>
     <div>
       New player:
@@ -13,16 +15,16 @@
       <thead>
       <tr>
         <th></th>
-        <th ng-repeat="player in players">{{player}}</th>
+        <th ng-repeat="player in game.players">{{player}}</th>
       </tr>
       </thead>
       <tbody>
-      <tr ng-repeat="round in rounds" ng-model="round">
+      <tr ng-repeat="round in game.rounds" ng-model="round">
         <td>{{round.number}}</td>
         <td ng-repeat="score in round.scores" class="score">
           <div ng-show="score.total == null">
           <span ng-repeat="delta in round.commonDeltas(score.index)" class="deltaPanel">
-            <button ng-click="changeScore(round, score, delta)">{{delta | deltaPrint}}</button>
+            <button ng-click="changeScore(round, score, delta)">{{delta | deltaPrinter}}</button>
           </span>
           </div>
           <input type="number" ng-model="score.total"
