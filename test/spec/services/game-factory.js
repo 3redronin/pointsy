@@ -7,12 +7,17 @@ describe('Service: gameFactory', function () {
 
   // instantiate service
   var gameFactory;
+  /** @type Game */
+  var game;
   beforeEach(inject(function (_gameFactory_) {
     gameFactory = _gameFactory_;
+    game = _gameFactory_.create();
   }));
 
-  it('should do something', function () {
-    expect(!!gameFactory).toBe(true);
+  it('should do create a game with no rounds and no players', function () {
+    expect(game.rounds.length).toBe(0);
+    expect(game.players.length).toBe(0);
+
   });
 
 });

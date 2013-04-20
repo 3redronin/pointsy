@@ -5,6 +5,7 @@ var mountFolder = function (connect, dir) {
 };
 
 module.exports = function (grunt) {
+
   // load all grunt tasks
   require('matchdep').filterDev('grunt-*').forEach(grunt.loadNpmTasks);
 
@@ -16,7 +17,8 @@ module.exports = function (grunt) {
 
   try {
     yeomanConfig.app = require('./component.json').appPath || yeomanConfig.app;
-  } catch (e) {}
+  } catch (e) {
+  }
 
   grunt.initConfig({
     yeoman: yeomanConfig,
@@ -48,7 +50,7 @@ module.exports = function (grunt) {
       },
       test: {
         options: {
-          port: 9000,
+          port: 19000,
           middleware: function (connect) {
             return [
               mountFolder(connect, '.tmp'),
@@ -77,9 +79,23 @@ module.exports = function (grunt) {
       ]
     },
     karma: {
-      unit: {
+      localDev: {
         configFile: 'karma.conf.js',
-        singleRun: true
+        singleRun: false,
+        autoWatch: true,
+        port: 8080,
+        runnerPort: 9100,
+        // Start these browsers, currently available:
+        // - Chrome, ChromeCanary, Firefox, Opera, Safari (only Mac), PhantomJS, IE (only Windows)
+        browsers: ['PhantomJS', 'Chrome']
+      },
+      buildServer: {
+        configFile: 'karma.conf.js',
+        singleRun: true,
+        autoWatch: false,
+        port: 18080,
+        runnerPort: 19100,
+        browsers: ['PhantomJS']
       }
     },
     concat: {
@@ -107,12 +123,14 @@ module.exports = function (grunt) {
     },
     imagemin: {
       dist: {
-        files: [{
-          expand: true,
-          cwd: '<%= yeoman.app %>/images',
-          src: '{,*/}*.{png,jpg,jpeg}',
-          dest: '<%= yeoman.dist %>/images'
-        }]
+        files: [
+          {
+            expand: true,
+            cwd: '<%= yeoman.app %>/images',
+            src: '{,*/}*.{png,jpg,jpeg}',
+            dest: '<%= yeoman.dist %>/images'
+          }
+        ]
       }
     },
     cssmin: {
@@ -129,21 +147,23 @@ module.exports = function (grunt) {
       dist: {
         options: {
           /*removeCommentsFromCDATA: true,
-          // https://github.com/yeoman/grunt-usemin/issues/44
-          //collapseWhitespace: true,
-          collapseBooleanAttributes: true,
-          removeAttributeQuotes: true,
-          removeRedundantAttributes: true,
-          useShortDoctype: true,
-          removeEmptyAttributes: true,
-          removeOptionalTags: true*/
+           // https://github.com/yeoman/grunt-usemin/issues/44
+           //collapseWhitespace: true,
+           collapseBooleanAttributes: true,
+           removeAttributeQuotes: true,
+           removeRedundantAttributes: true,
+           useShortDoctype: true,
+           removeEmptyAttributes: true,
+           removeOptionalTags: true*/
         },
-        files: [{
-          expand: true,
-          cwd: '<%= yeoman.app %>',
-          src: ['*.html', 'views/*.html'],
-          dest: '<%= yeoman.dist %>'
-        }]
+        files: [
+          {
+            expand: true,
+            cwd: '<%= yeoman.app %>',
+            src: ['*.html', 'views/*.html'],
+            dest: '<%= yeoman.dist %>'
+          }
+        ]
       }
     },
     cdnify: {
@@ -153,12 +173,14 @@ module.exports = function (grunt) {
     },
     ngmin: {
       dist: {
-        files: [{
-          expand: true,
-          cwd: '<%= yeoman.dist %>/scripts',
-          src: '*.js',
-          dest: '<%= yeoman.dist %>/scripts'
-        }]
+        files: [
+          {
+            expand: true,
+            cwd: '<%= yeoman.dist %>/scripts',
+            src: '*.js',
+            dest: '<%= yeoman.dist %>/scripts'
+          }
+        ]
       }
     },
     uglify: {
@@ -166,24 +188,26 @@ module.exports = function (grunt) {
         files: {
           '<%= yeoman.dist %>/scripts/scripts.js': [
             '<%= yeoman.dist %>/scripts/scripts.js'
-          ],
+          ]
         }
       }
     },
     copy: {
       dist: {
-        files: [{
-          expand: true,
-          dot: true,
-          cwd: '<%= yeoman.app %>',
-          dest: '<%= yeoman.dist %>',
-          src: [
-            '*.{ico,txt}',
-            '.htaccess',
-            'components/**/*',
-            'images/{,*/}*.{gif,webp}'
-          ]
-        }]
+        files: [
+          {
+            expand: true,
+            dot: true,
+            cwd: '<%= yeoman.app %>',
+            dest: '<%= yeoman.dist %>',
+            src: [
+              '*.{ico,txt}',
+              '.htaccess',
+              'components/**/*',
+              'images/{,*/}*.{gif,webp}'
+            ]
+          }
+        ]
       }
     }
   });
@@ -203,13 +227,15 @@ module.exports = function (grunt) {
   grunt.registerTask('test', [
     'clean:server',
     'connect:test',
-    'karma'
+    'karma:localDev'
   ]);
 
   grunt.registerTask('build', [
     'clean:dist',
     'jshint',
-    'test',
+    'clean:server',
+    'connect:test',
+    'karma:buildServer',
     'useminPrepare',
     'imagemin',
     'cssmin',
