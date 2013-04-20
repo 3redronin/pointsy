@@ -28,7 +28,7 @@ module.exports = function (grunt) {
           '<%= yeoman.app %>/{,*/}*.html',
           '{.tmp,<%= yeoman.app %>}/styles/{,*/}*.css',
           '{.tmp,<%= yeoman.app %>}/scripts/{,*/}*.js',
-          '<%= yeoman.app %>/images/{,*/}*.{png,jpg,jpeg,gif,webp}'
+          '<%= yeoman.app %>/images/{,*/}*.{png,jpg,jpeg,gif,webp,svg}'
         ],
         tasks: ['livereload']
       }
@@ -66,7 +66,18 @@ module.exports = function (grunt) {
       }
     },
     clean: {
-      dist: ['.tmp', '<%= yeoman.dist %>/*'],
+      dist: {
+        files: [
+          {
+            dot: true,
+            src: [
+              '.tmp',
+              '<%= yeoman.dist %>/*',
+              '!<%= yeoman.dist %>/.git*'
+            ]
+          }
+        ]
+      },
       server: '.tmp'
     },
     jshint: {
@@ -192,6 +203,18 @@ module.exports = function (grunt) {
         }
       }
     },
+    rev: {
+      dist: {
+        files: {
+          src: [
+            '<%= yeoman.dist %>/scripts/{,*/}*.js',
+            '<%= yeoman.dist %>/styles/{,*/}*.css',
+            '<%= yeoman.dist %>/images/{,*/}*.{png,jpg,jpeg,gif,webp,svg}',
+            '<%= yeoman.dist %>/styles/fonts/*'
+          ]
+        }
+      }
+    },
     copy: {
       dist: {
         files: [
@@ -203,8 +226,8 @@ module.exports = function (grunt) {
             src: [
               '*.{ico,txt}',
               '.htaccess',
-              'components/**/*',
-              'images/{,*/}*.{gif,webp}'
+              'images/{,*/}*.{gif,webp}',
+              'styles/fonts/*'
             ]
           }
         ]
@@ -213,8 +236,6 @@ module.exports = function (grunt) {
   });
 
   grunt.renameTask('regarde', 'watch');
-  // remove when mincss task is renamed
-  grunt.renameTask('mincss', 'cssmin');
 
   grunt.registerTask('server', [
     'clean:server',
@@ -243,9 +264,10 @@ module.exports = function (grunt) {
     'concat',
     'copy',
     'cdnify',
-    'usemin',
     'ngmin',
-    'uglify'
+    'uglify',
+    'rev',
+    'usemin'
   ]);
 
   grunt.registerTask('default', ['build']);
