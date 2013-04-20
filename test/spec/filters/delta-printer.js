@@ -11,9 +11,15 @@ describe('Filter: deltaPrinter', function () {
     deltaPrinter = $filter('deltaPrinter');
   }));
 
-  it('should return the input prefixed with "deltaPrinter filter:"', function () {
-    var text = 'angularjs';
-    expect(deltaPrinter(text)).toBe('deltaPrinter filter: ' + text);
+  it('should return the input prefixed with "+" for positive numbers', function () {
+    expect(deltaPrinter(1)).toEqual('+1');
+    expect(deltaPrinter(100)).toEqual('+100');
   });
+
+  it('should return the original value as a string for 0 and negative numbers', function () {
+    expect(deltaPrinter(0)).toEqual('0');
+    expect(deltaPrinter(-1)).toEqual('-1');
+  });
+
 
 });

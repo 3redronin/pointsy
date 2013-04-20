@@ -3,11 +3,12 @@
 describe('Directive: scorecard', function () {
   beforeEach(module('pointsyApp'));
 
-  var element;
+  var element, scope;
 
-  it('should make hidden element visible', inject(function ($rootScope, $compile) {
+  it('Put a game variable on the scope', inject(function ($rootScope, $compile) {
     element = angular.element('<scorecard></scorecard>');
-    element = $compile(element)($rootScope);
-    expect(element.text()).toBe('this is the scorecard directive');
+    scope = $rootScope.$new();
+    element = $compile(element)(scope);
+    expect(scope.game).not.toBeNull();
   }));
 });
