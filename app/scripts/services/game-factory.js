@@ -20,7 +20,7 @@
       var round = {
         number: this.rounds.length + 1,
         scores: []
-      }
+      };
       for (var i = 0; i < me.players.length; i++) {
         round.scores.push({index: i, total: null});
       }
@@ -35,22 +35,22 @@
         for (var i = startIndex; i < me.rounds.length; i++) {
           var round = me.rounds[i];
           var score = round.scores[scoreIndex];
-          if (score.total == null) {
+          if (score.total === null) {
             continue;
           }
           var delta = score.total - lastScore.total;
-          if (deltas.indexOf(delta) == -1) {
+          if (deltas.indexOf(delta) === -1) {
             deltas.push(delta);
           }
           lastScore = score;
         }
 
-        if (deltas.length == 0) {
+        if (deltas.length === 0) {
           deltas = [-1, 0, 1];
-        } else if (deltas.length == 1) {
-          if (deltas.indexOf(0) == -1) {
+        } else if (deltas.length === 1) {
+          if (deltas.indexOf(0) === -1) {
             deltas.push(0);
-          } else if (deltas.indexOf(1) == -1) {
+          } else if (deltas.indexOf(1) === -1) {
             deltas.push(1);
           }
         } else {
@@ -71,9 +71,9 @@
       for (var i = currentRound.number - 1; i < me.rounds.length; i++) {
         var round = me.rounds[i];
         var score = round.scores[currentScore.index];
-        if (score.total == null) {
-          if (currentRound == round) {
-            if (i == 0) {
+        if (score.total === null) {
+          if (currentRound === round) {
+            if (i === 0) {
               score.total = delta;
             } else {
               var previousRound = me.rounds[i - 1];
