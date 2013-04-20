@@ -8,7 +8,7 @@ angular.module('pointsyApp')
       scope: {
         game: '='
       },
-      controller: function ($scope) {
+      controller: [ '$scope', function ($scope) {
         var game = $scope.game;
         $scope.addRoundIfNeeded = function (round) {
           if (round.isLast()) {
@@ -29,6 +29,6 @@ angular.module('pointsyApp')
           }
           $scope.newPlayer = '';
         };
-      }
+      }]
     };
   });
