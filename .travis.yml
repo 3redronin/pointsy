@@ -1,21 +1,4 @@
----
 language: node_js
 node_js:
 - '0.8'
 script: grunt
-env:
-  global:
-  - ARTIFACTS_AWS_REGION=Oregon
-  - ARTIFACTS_S3_BUCKET=pointsy
-  - secure: |-
-      WzMpAVK2oIlAS4KHRhQkffeRPWo1SYDmH7PHepZJwLQu7n5eQfTdgzkiOUfA
-      tvTecOvT588jBlCrYw5G58//pjuZr77bwxG9l1KAz9zTlCqxACpkHlYsKoLK
-      97XtAqvJ65ONq1iGmDYD+uWKz4YgFpsDlz+V+RusxBQb51rPN+M=
-  - secure: |-
-      PQhK4WFGz2lsDmZosJ00QbCCWvCjNE5FHs6me2AVzP4PI3JLKzeSehSdIFPx
-      TRpM1a+1PT2VdHY7eMgZEP2D8Yd4erjOOppS+g/fLkx/+7gqIAbublUFVySh
-      RY5cgaaGAt2pzXruYrAchamVO8ZDlDPXJIJrGq/RKbLGGVYOumU=
-before_script:
-   - "gem install travis-artifacts"
-after_success:
-  - "travis-artifacts upload --path dist/**/* --target-path /"
