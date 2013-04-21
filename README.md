@@ -33,4 +33,4 @@ Run:
 
 This will output the website in dist/
 
-  ![Build Status](https://travis-ci.org/3redronin/pointsy.png?branch=master)
+[![Build Status](https://travis-ci.org/3redronin/pointsy.png?branch=master)](https://travis-ci.org/3redronin/pointsy)

@@ -8,9 +8,9 @@ angular.module('pointsyApp')
      */
     function ($scope, gameFactory) {
       var game = gameFactory.create();
-      game.addPlayer('Whawha');
+      game.addPlayer(new pointsy.Player('Whawha'));
 
-      game.addPlayer('Daniel');
+      game.addPlayer(new pointsy.Player('Daniel'));
       game.addRound();
 
       var game2 = gameFactory.create();
