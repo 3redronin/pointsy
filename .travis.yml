@@ -18,4 +18,4 @@ env:
       TRpM1a+1PT2VdHY7eMgZEP2D8Yd4erjOOppS+g/fLkx/+7gqIAbublUFVySh
       RY5cgaaGAt2pzXruYrAchamVO8ZDlDPXJIJrGq/RKbLGGVYOumU=
 after_success:
-- "travis-artifacts upload --path dist --target-path $TRAVIS_BUILD_ID/$TRAVIS_JOB_ID"
+- "travis-artifacts upload --path dist --target-path ''"
