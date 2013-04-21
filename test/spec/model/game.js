@@ -6,7 +6,7 @@ describe('Model: pointsy.Game', function () {
   var game;
   beforeEach(function () {
     game = new pointsy.Game();
-    game.name = "The game";
+    game.name = 'The game';
   });
 
   it('creates a game with no rounds and no players', function () {

@@ -22,7 +22,7 @@ angular.module('pointsyApp')
 
       $scope.addGame = function () {
         var newGame = new pointsy.Game();
-        newGame.name = "Game " + ($scope.games.length + 1);
+        newGame.name = 'Game ' + ($scope.games.length + 1);
         newGame.addRound();
         $scope.games.unshift(newGame);
       };

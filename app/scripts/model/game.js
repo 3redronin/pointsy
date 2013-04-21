@@ -6,7 +6,7 @@ window.pointsy = window.pointsy || {};
  */
 pointsy.Game = function () {
   /** @type {String} */
-  this.name = "Game";
+  this.name = 'Game';
 
   /** @type {pointsy.Player[]} */
   this.players = [];
