@@ -1,8 +1,12 @@
 <div class="hero-unit">
   <h1>Pointsy</h1>
 
+  <p>
+    <button ng-click="addGame()">New game</button>
+  </p>
+
   <div ng-repeat="game in games">
-    <h2>Game {{$index + 1}}</h2>
+    <h2>{{game.name}}</h2>
     <scorecard game="game"></scorecard>
   </div>
 

@@ -5,6 +5,9 @@ window.pointsy = window.pointsy || {};
  * @constructor
  */
 pointsy.Game = function () {
+  /** @type {String} */
+  this.name = "Game";
+
   /** @type {pointsy.Player[]} */
   this.players = [];
   /** @type {pointsy.Round[]} */
@@ -100,7 +103,8 @@ pointsy.Game.prototype.toMemento = function () {
     rounds.push(this.rounds[i].toMemento());
   }
   return {
-    version: 1,
+    version: 2,
+    name: this.name,
     players: peeps,
     rounds: rounds
   };
@@ -108,6 +112,7 @@ pointsy.Game.prototype.toMemento = function () {
 
 pointsy.Game.fromMemento = function (memento) {
   var game = new pointsy.Game();
+  game.name = memento.name;
   for (var i = 0; i < memento.players.length; i++) {
     var player = pointsy.Player.fromMemento(memento.players[i]);
     game.addPlayer(player);

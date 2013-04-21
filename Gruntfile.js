@@ -58,6 +58,17 @@ module.exports = function (grunt) {
             ];
           }
         }
+      },
+      buildServer: {
+        options: {
+          port: 29000,
+          middleware: function (connect) {
+            return [
+              mountFolder(connect, '.tmp'),
+              mountFolder(connect, 'buildServer')
+            ];
+          }
+        }
       }
     },
     open: {
@@ -255,7 +266,7 @@ module.exports = function (grunt) {
     'clean:dist',
     'jshint',
     'clean:server',
-    'connect:test',
+    'connect:buildServer',
     'karma:buildServer',
     'useminPrepare',
     'imagemin',

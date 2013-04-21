@@ -7,15 +7,23 @@ angular.module('pointsyApp')
      * @param {GameFactory} gameFactory
      */
     function ($scope, gameFactory) {
-      var game = gameFactory.create();
-      game.addPlayer(new pointsy.Player('Whawha'));
+      var games = gameFactory.loadGames();
+      if (games.length === 0) {
+        var game = new pointsy.Game();
+        game.addPlayer(new pointsy.Player('Player one'));
+        game.addPlayer(new pointsy.Player('Player two'));
+        game.addRound();
+        games.push(game);
+      }
+      $scope.games = games;
+      $scope.$watch('games', function () {
+        gameFactory.saveGames(games);
+      }, true);
 
-      game.addPlayer(new pointsy.Player('Daniel'));
-      game.addRound();
-
-      var game2 = gameFactory.create();
-      game2.addRound();
-
-      $scope.games = [ game, game2 ];
-
+      $scope.addGame = function () {
+        var newGame = new pointsy.Game();
+        newGame.name = "Game " + ($scope.games.length + 1);
+        newGame.addRound();
+        $scope.games.unshift(newGame);
+      };
     });
