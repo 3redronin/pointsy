@@ -1,10 +1,8 @@
-
 var port = parseInt(process.env['APP_PORT'] || '8082');
 var appName = process.env['APP_NAME'] || 'pointsy'; // everything must be served from /{appname}/
 
 var express = require('express');
 var app = express();
-
 
 app.use('/' + appName, express.static('static'));
 
