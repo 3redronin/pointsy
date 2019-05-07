@@ -17,3 +17,7 @@ td.score input {
 .deltaPanel {
   white-space: nowrap;
 }
+
+.hero-unit {
+  background-color: lightblue;
+}
