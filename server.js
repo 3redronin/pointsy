@@ -1,11 +1,9 @@
-var port = parseInt(process.env['APP_PORT'] || '8082');
-var appName = process.env['APP_NAME'] || 'pointsy'; // everything must be served from /{appname}/
+const port = parseInt(process.env['APP_PORT'] || '8082');
+const express = require('express');
+const app = express();
 
-var express = require('express');
-var app = express();
+app.use('/pointsy', express.static('static'));
 
-app.use('/' + appName, express.static('static'));
-
-app.listen(port, 'localhost', function () {
-    console.log('Service started at http://localhost:' + port + '/' + appName + '/');
+app.listen(port, 'localhost', () => {
+    console.log('Service started at http://localhost:' + port + '/pointsy' + '/');
 });
